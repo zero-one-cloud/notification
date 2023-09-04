@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package api.notification.v1;
+
+import "validate/validate.proto";
+import "google/api/annotations.proto";
+
+option go_package = "api/notification/v1;v1";
+
+service NotificationService {
+  // 发送短信验证码
+  rpc SendSmsVerifyCode (SendSmsVerifyCodeReq) returns (SendSmsVerifyCodeReply);
+  // 发送邮件
+  rpc SendEmail(SendEmailReq) returns(SendEmailReply);
+}
+
+message SendSmsVerifyCodeReq {
+  // 如果需要带区号则自己修改校验条件
+  string phone = 1 [(validate.rules).string = {len: 11}];
+}
+message SendSmsVerifyCodeReply {
+  int64 sms_id = 1;
+  // 状态 0待发送 1已发送 2发送失败
+  int64 status = 2;
+  string code = 3;
+}
+
+message SendEmailReq {
+  int64 user_id = 1 [(validate.rules).int64.gt = 0];
+  string address = 2 [(validate.rules).string.email = true];
+  // 主题
+  string subject = 3 [(validate.rules).string = {min_len:2, max_len:64}];
+  // 内容
+  string content = 4 [(validate.rules).string = {min_len:1}];
+}
+message SendEmailReply {
+  bool success = 1;
+}
