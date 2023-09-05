@@ -9,21 +9,42 @@ option go_package = "api/notification/v1;v1";
 
 service NotificationService {
   // 发送短信验证码
-  rpc SendSmsVerifyCode (SendSmsVerifyCodeReq) returns (SendSmsVerifyCodeReply);
+  rpc SendSmsVerifyCode (SendSmsVerifyCodeReq) returns (SendSmsVerifyCodeReply) {
+    option (google.api.http) = {
+      post: "/sms/verify_code",
+      body: "*",
+    };
+  };
+  // 发送通用短信
+  rpc SendSms(SendSmsReq) returns(SendSmsReply) {
+    option (google.api.http) = {
+      post: "/sms/send",
+      body: "*"
+    };
+  }
   // 发送邮件
-  rpc SendEmail(SendEmailReq) returns(SendEmailReply);
+  rpc SendEmail(SendEmailReq) returns(SendEmailReply) {
+    option (google.api.http) = {
+      post: "/email",
+      body: "*",
+    };
+  };
 }
 
 message SendSmsVerifyCodeReq {
   // 如果需要带区号则自己修改校验条件
   string phone = 1 [(validate.rules).string = {len: 11}];
 }
+
 message SendSmsVerifyCodeReply {
   int64 sms_id = 1;
   // 状态 0待发送 1已发送 2发送失败
   int64 status = 2;
   string code = 3;
 }
+
+message SendSmsReq {}
+message SendSmsReply{}
 
 message SendEmailReq {
   int64 user_id = 1 [(validate.rules).int64.gt = 0];

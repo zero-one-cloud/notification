@@ -11,6 +11,8 @@ message Bootstrap {
   Trace trace = 3;
   Server server = 4;
   Data data = 5;
+  Email email = 6;
+  Sms  sms = 7;
 }
 
 message Service {
@@ -62,4 +64,23 @@ message Registry {
 
 message Trace {
   string endpoint = 1;
+}
+
+message Email {
+  string host = 1;
+  int32 port = 2;
+  string user = 3;
+  string password = 4;
+  string from = 5;
+}
+
+message Sms {
+  message Ali {
+    string name = 1;
+    string access_key = 2;
+    string access_secret = 3;
+    string sign_name = 4;     // 验证模版使用频率比较高，这里直接配置
+    string template_code = 5; // 验证模版使用频率比较高，这里直接配置
+  }
+  Ali ali = 1;
 }

@@ -3,36 +3,110 @@
 
 openapi: 3.0.3
 info:
-    title: Greeter API
-    description: The greeting service definition.
+    title: NotificationService API
     version: 0.0.1
 paths:
-    /helloworld/{name}:
-        get:
+    /email:
+        post:
             tags:
-                - Greeter
-            description: Sends a greeting
-            operationId: Greeter_SayHello
-            parameters:
-                - name: name
-                  in: path
-                  required: true
-                  schema:
-                    type: string
+                - NotificationService
+            description: 发送邮件
+            operationId: NotificationService_SendEmail
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.notification.v1.SendEmailReq'
+                required: true
             responses:
                 "200":
                     description: OK
                     content:
                         application/json:
                             schema:
-                                $ref: '#/components/schemas/helloworld.v1.HelloReply'
+                                $ref: '#/components/schemas/api.notification.v1.SendEmailReply'
+    /sms/send:
+        post:
+            tags:
+                - NotificationService
+            description: 发送通用短信
+            operationId: NotificationService_SendSms
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.notification.v1.SendSmsReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.notification.v1.SendSmsReply'
+    /sms/verify_code:
+        post:
+            tags:
+                - NotificationService
+            description: 发送短信验证码
+            operationId: NotificationService_SendSmsVerifyCode
+            requestBody:
+                content:
+                    application/json:
+                        schema:
+                            $ref: '#/components/schemas/api.notification.v1.SendSmsVerifyCodeReq'
+                required: true
+            responses:
+                "200":
+                    description: OK
+                    content:
+                        application/json:
+                            schema:
+                                $ref: '#/components/schemas/api.notification.v1.SendSmsVerifyCodeReply'
 components:
     schemas:
-        helloworld.v1.HelloReply:
+        api.notification.v1.SendEmailReply:
             type: object
             properties:
-                message:
+                success:
+                    type: boolean
+        api.notification.v1.SendEmailReq:
+            type: object
+            properties:
+                userId:
+                    type: integer
+                    format: int64
+                address:
                     type: string
-            description: The response message containing the greetings
+                subject:
+                    type: string
+                    description: 主题
+                content:
+                    type: string
+                    description: 内容
+        api.notification.v1.SendSmsReply:
+            type: object
+            properties: {}
+        api.notification.v1.SendSmsReq:
+            type: object
+            properties: {}
+        api.notification.v1.SendSmsVerifyCodeReply:
+            type: object
+            properties:
+                smsId:
+                    type: integer
+                    format: int64
+                status:
+                    type: integer
+                    description: 状态 0待发送 1已发送 2发送失败
+                    format: int64
+                code:
+                    type: string
+        api.notification.v1.SendSmsVerifyCodeReq:
+            type: object
+            properties:
+                phone:
+                    type: string
+                    description: 如果需要带区号则自己修改校验条件
 tags:
-    - name: Greeter
+    - name: NotificationService

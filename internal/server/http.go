@@ -1,9 +1,10 @@
 package server
 
 import (
-	v1 "shop-notification/api/helloworld/v1"
-	"shop-notification/internal/conf"
-	"shop-notification/internal/service"
+	"github.com/go-kratos/kratos/v2/middleware/validate"
+	v1 "github.com/zero-one-cloud/shop-notification/api/notification/v1"
+	"github.com/zero-one-cloud/shop-notification/internal/conf"
+	"github.com/zero-one-cloud/shop-notification/internal/service"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"
@@ -11,12 +12,13 @@ import (
 )
 
 // NewHTTPServer new an HTTP server.
-func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, logger log.Logger) *http.Server {
+func NewHTTPServer(c *conf.Server, notification *service.NotificationService, logger log.Logger) *http.Server {
 	var opts = []http.ServerOption{
 		http.ResponseEncoder(respEncoder), // 用来将用户pb定义里的reply结构体序列化后写入Response Body中
 		http.ErrorEncoder(errorEncoder),   // 用来将业务抛出的error序列化后写入Response Body中
 		http.Middleware(
 			recovery.Recovery(),
+			validate.Validator(),
 		),
 	}
 	if c.Http.Network != "" {
@@ -29,6 +31,6 @@ func NewHTTPServer(c *conf.Server, greeter *service.GreeterService, logger log.L
 		opts = append(opts, http.Timeout(c.Http.Timeout.AsDuration()))
 	}
 	srv := http.NewServer(opts...)
-	v1.RegisterGreeterHTTPServer(srv, greeter)
+	v1.RegisterNotificationServiceHTTPServer(srv, notification)
 	return srv
 }

@@ -4,7 +4,7 @@ import (
 	"flag"
 	"os"
 
-	"shop-notification/internal/conf"
+	"github.com/zero-one-cloud/shop-notification/internal/conf"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/config"

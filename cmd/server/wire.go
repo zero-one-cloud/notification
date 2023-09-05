@@ -6,11 +6,11 @@
 package main
 
 import (
-	"shop-notification/internal/biz"
-	"shop-notification/internal/conf"
-	"shop-notification/internal/data"
-	"shop-notification/internal/server"
-	"shop-notification/internal/service"
+	"github.com/zero-one-cloud/shop-notification/internal/biz"
+	"github.com/zero-one-cloud/shop-notification/internal/conf"
+	"github.com/zero-one-cloud/shop-notification/internal/data"
+	"github.com/zero-one-cloud/shop-notification/internal/server"
+	"github.com/zero-one-cloud/shop-notification/internal/service"
 
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"

@@ -6,7 +6,7 @@ import (
 	"github.com/go-kratos/kratos/v2/registry"
 	"github.com/go-redis/redis/v8"
 	_ "github.com/go-sql-driver/mysql"
-	"shop-notification/internal/conf"
+	"github.com/zero-one-cloud/shop-notification/internal/conf"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"time"
@@ -24,7 +24,7 @@ var ProviderSet = wire.NewSet(
 	NewRegistrar,
 	NewMysqlCmd,
 	NewRedisCmd,
-	NewGreeterRepo,
+	NewSmsRepo,
 )
 
 // Data .

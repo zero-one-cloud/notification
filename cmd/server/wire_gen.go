@@ -9,11 +9,11 @@ package main
 import (
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
-	"shop-notification/internal/biz"
-	"shop-notification/internal/conf"
-	"shop-notification/internal/data"
-	"shop-notification/internal/server"
-	"shop-notification/internal/service"
+	"github.com/zero-one-cloud/shop-notification/internal/biz"
+	"github.com/zero-one-cloud/shop-notification/internal/conf"
+	"github.com/zero-one-cloud/shop-notification/internal/data"
+	"github.com/zero-one-cloud/shop-notification/internal/server"
+	"github.com/zero-one-cloud/shop-notification/internal/service"
 )
 
 import (
@@ -30,11 +30,11 @@ func wireApp(env *conf.Env, confServer *conf.Server, confData *conf.Data, bootst
 	if err != nil {
 		return nil, nil, err
 	}
-	greeterRepo := data.NewGreeterRepo(dataData, logger)
-	greeterUseCase := biz.NewGreeterUseCase(greeterRepo, logger)
-	greeterService := service.NewGreeterService(greeterUseCase)
-	grpcServer := server.NewGRPCServer(confServer, greeterService, logger)
-	httpServer := server.NewHTTPServer(confServer, greeterService, logger)
+	smsRepo := data.NewSmsRepo(dataData, logger)
+	smsUseCase := biz.NewSmsUseCase(smsRepo, logger)
+	notificationService := service.NewNotificationService(smsUseCase, logger)
+	grpcServer := server.NewGRPCServer(confServer, notificationService, logger)
+	httpServer := server.NewHTTPServer(confServer, notificationService, logger)
 	app := newApp(logger, grpcServer, httpServer)
 	return app, func() {
 		cleanup()

@@ -1,19 +1,19 @@
 env:
   mode: dev
 service:
-  name: example
+  name: shop.notification.service
   version: v1
 server:
   http:
-    addr: 0.0.0.0:8000
+    addr: 0.0.0.0:6109
     timeout: 10s
   grpc:
-    addr: 0.0.0.0:9000
+    addr: 0.0.0.0:6209
     timeout: 10s
 data:
   database:
     driver: mysql
-    source: root:root@tcp(127.0.0.1:3306)/test?parseTime=true&collation=utf8mb4_unicode_ci&loc=Asia%2FShanghai&charset=utf8mb4
+    source: root:rootroot@tcp(127.0.0.1:3306)/zero-one?parseTime=true&collation=utf8mb4_unicode_ci&loc=Asia%2FShanghai&charset=utf8mb4
   redis:
     addr: 127.0.0.1:6379
     password:
@@ -23,3 +23,18 @@ trace:
   endpoint: http://127.0.0.1:12345/api/trace
 etcd:
   address: 127.0.0.1:2379
+
+email:
+  host:
+  port:
+  user:
+  password:
+  from:
+
+sms:
+  ali:
+    name: "阿里云"
+    access_key: "access_key"
+    access_secret: "access_secret"
+    sign_name: "sign_name"
+    template_code: "template_code"
