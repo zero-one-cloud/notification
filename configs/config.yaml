@@ -25,10 +25,10 @@ etcd:
   address: 127.0.0.1:2379
 
 email:
-  host:
-  port:
-  user:
-  password:
+  host: smtp.exmail.qq.com
+  port: 465
+  user: admin@ainiok.com
+  password: adsf12312
   from:
 
 sms:

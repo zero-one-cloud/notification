@@ -32,7 +32,9 @@ func wireApp(env *conf.Env, confServer *conf.Server, confData *conf.Data, bootst
 	}
 	smsRepo := data.NewSmsRepo(dataData, logger)
 	smsUseCase := biz.NewSmsUseCase(smsRepo, logger)
-	notificationService := service.NewNotificationService(smsUseCase, logger)
+	emailRepo := data.NewEmailRepo(dataData, logger)
+	emailUseCase := biz.NewEmailUseCase(emailRepo, logger)
+	notificationService := service.NewNotificationService(smsUseCase, emailUseCase, logger)
 	grpcServer := server.NewGRPCServer(confServer, notificationService, logger)
 	httpServer := server.NewHTTPServer(confServer, notificationService, logger)
 	app := newApp(logger, grpcServer, httpServer)

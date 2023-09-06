@@ -9,13 +9,15 @@ import (
 type NotificationService struct {
 	v1.UnimplementedNotificationServiceServer
 
-	smsUC *biz.SmsUseCase
-	log   *log.Helper
+	smsUC   *biz.SmsUseCase
+	emailUC *biz.EmailUseCase
+	log     *log.Helper
 }
 
-func NewNotificationService(smsUC *biz.SmsUseCase, logger log.Logger) *NotificationService {
+func NewNotificationService(smsUC *biz.SmsUseCase, emailUc *biz.EmailUseCase, logger log.Logger) *NotificationService {
 	return &NotificationService{
-		log:   log.NewHelper(log.With(logger, "module", "service/NotificationService")),
-		smsUC: smsUC,
+		log:     log.NewHelper(log.With(logger, "module", "service/NotificationService")),
+		smsUC:   smsUC,
+		emailUC: emailUc,
 	}
 }

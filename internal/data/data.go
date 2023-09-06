@@ -25,6 +25,7 @@ var ProviderSet = wire.NewSet(
 	NewMysqlCmd,
 	NewRedisCmd,
 	NewSmsRepo,
+	NewEmailRepo,
 )
 
 // Data .

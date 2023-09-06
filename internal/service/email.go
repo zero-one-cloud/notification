@@ -6,5 +6,9 @@ import (
 )
 
 func (s *NotificationService) SendEmail(ctx context.Context, req *v1.SendEmailReq) (*v1.SendEmailReply, error) {
-	return &v1.SendEmailReply{}, nil
+	err := s.emailUC.SendEmail(ctx, req.Address, req.Subject, req.Content)
+	if err != nil {
+		return nil, err
+	}
+	return &v1.SendEmailReply{Success: true}, nil
 }

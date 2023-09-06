@@ -16,7 +16,7 @@ type SmsUseCase struct {
 }
 
 func NewSmsUseCase(repo SmsRepo, logger log.Logger) *SmsUseCase {
-	return &SmsUseCase{repo: repo, log: log.NewHelper(logger)}
+	return &SmsUseCase{repo: repo, log: log.NewHelper(log.With(logger, "module", "useCase/sms"))}
 }
 
 func (suc *SmsUseCase) SendSmsVerifyCode(ctx context.Context, sendType int64, mobile string) (int64, int64, string, error) {
