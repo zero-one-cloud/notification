@@ -1,9 +1,9 @@
 package server
 
 import (
-	v1 "github.com/zero-one-cloud/shop-notification/api/notification/v1"
-	"github.com/zero-one-cloud/shop-notification/internal/conf"
-	"github.com/zero-one-cloud/shop-notification/internal/service"
+	v1 "github.com/zero-one-cloud/notification/api/notification/v1"
+	"github.com/zero-one-cloud/notification/internal/conf"
+	"github.com/zero-one-cloud/notification/internal/service"
 
 	"github.com/go-kratos/kratos/v2/log"
 	"github.com/go-kratos/kratos/v2/middleware/recovery"

@@ -2,8 +2,8 @@ package service
 
 import (
 	"github.com/go-kratos/kratos/v2/log"
-	v1 "github.com/zero-one-cloud/shop-notification/api/notification/v1"
-	"github.com/zero-one-cloud/shop-notification/internal/biz"
+	v1 "github.com/zero-one-cloud/notification/api/notification/v1"
+	"github.com/zero-one-cloud/notification/internal/biz"
 )
 
 type NotificationService struct {

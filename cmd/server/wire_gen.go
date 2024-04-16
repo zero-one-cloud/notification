@@ -9,11 +9,11 @@ package main
 import (
 	"github.com/go-kratos/kratos/v2"
 	"github.com/go-kratos/kratos/v2/log"
-	"github.com/zero-one-cloud/shop-notification/internal/biz"
-	"github.com/zero-one-cloud/shop-notification/internal/conf"
-	"github.com/zero-one-cloud/shop-notification/internal/data"
-	"github.com/zero-one-cloud/shop-notification/internal/server"
-	"github.com/zero-one-cloud/shop-notification/internal/service"
+	"github.com/zero-one-cloud/notification/internal/biz"
+	"github.com/zero-one-cloud/notification/internal/conf"
+	"github.com/zero-one-cloud/notification/internal/data"
+	"github.com/zero-one-cloud/notification/internal/server"
+	"github.com/zero-one-cloud/notification/internal/service"
 )
 
 import (

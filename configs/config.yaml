@@ -27,7 +27,7 @@ etcd:
 email:
   host: smtp.exmail.qq.com
   port: 465
-  user: admin@ainiok.com
+  user: admin@xxxxx.com
   password: adsf12312
   from:
 
